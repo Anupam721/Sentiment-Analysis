@@ -1,0 +1,10 @@
+Just run app.py and provide input through console
+
+app.py:
+Imports saved vectorizer and model files and provides predictions on user input.
+
+sentiment-analysis.py :
+Used to train the model. 
+
+joblib_MultinomialNAiveBayes_Model.pkl -->  saved model
+vectorizer.pkl -->saved vectorizer file
