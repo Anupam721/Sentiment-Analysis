@@ -1,0 +1,15 @@
+[NbConvertApp] Converting notebook script.ipynb to html
+
+[NbConvertApp] ERROR | Notebook JSON is invalid: Additional properties are not allowed ('outputs', 'execution_count' were unexpected)
+
+Failed validating 'additionalProperties' in markdown_cell:
+
+On instance['cells'][0]:
+{'cell_type': 'markdown',
+ 'execution_count': None,
+ 'metadata': {'_uuid': '93b7d96ea4a342b529d12cd15ebec38a3bf08661'},
+ 'outputs': ['...0 outputs...'],
+ 'source': '# Sentiment Analysis of Restaurant Reviews'}
+[NbConvertApp] Executing notebook with kernel: python3
+
+[NbConvertApp] Writing 277663 bytes to __results__.html

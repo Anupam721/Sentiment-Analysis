@@ -1,3 +1,5 @@
+from flask import Flask, request, render_template
+#Ml packages
 import joblib
 import numpy as np
 import pandas as pd
@@ -15,23 +17,33 @@ joblib_MNB_model = joblib.load(joblib_file)
 vectorizer_file_name = "vectorizer.pkl"
 loaded_vectorizer = joblib.load(vectorizer_file_name)
 
-#provide input to program
-#inputStmt = "It is a friggging awesome place !!!!"
-inputStmt = input("Enter a sentence to find prediction(+ve/-ve)")
-corpus = []
 
-#cleaning input-data
-review = re.sub('[^a-zA-Z]', ' ', inputStmt)
-review = review.lower()
-review = review.split()
-ps = PorterStemmer()
-review = [ps.stem(word) for word in review if not word in set(stopwords.words('english'))]
-review = ' '.join(review)
-corpus.append(review)
+app = Flask(__name__, template_folder='template')
 
-result = (joblib_MNB_model.predict(loaded_vectorizer.transform(corpus)))
+@app.route('/')
+def my_form():
+    return render_template('frontend.html')
 
-if result == 0:
-    print("Negative Sentiment")
-else:
-    print("Positive sentiment")
+@app.route('/', methods=['POST'])
+def my_form_post():
+    forminput = request.form['text']
+    corpus = []
+    #cleaning input-data
+    review = re.sub('[^a-zA-Z]', ' ', forminput)
+    review = review.lower()
+    review = review.split()
+    ps = PorterStemmer()
+    review = [ps.stem(word) for word in review if not word in set(stopwords.words('english'))]
+    review = ' '.join(review)
+    corpus.append(review)
+    result = (joblib_MNB_model.predict(loaded_vectorizer.transform(corpus)))
+    sentimentResult = ""
+    if result == 0:
+        sentimentResult = "Negative Sentiment"
+    else:
+        sentimentResult = "Positive sentiment"
+    return sentimentResult
+
+
+if __name__ == '__main__':
+    app.run(host="localhost", port=8000, debug=True)
