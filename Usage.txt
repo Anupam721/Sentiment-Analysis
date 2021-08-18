@@ -1,5 +1,4 @@
-Just run app.py and provide input through console
-
+Run app.py. Flask server will start
 app.py:
 Imports saved vectorizer and model files and provides predictions on user input.
 
